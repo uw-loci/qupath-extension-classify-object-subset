@@ -107,7 +107,7 @@ public final class ClassifySubsetDialog {
     private static final long BUSY_INDICATOR_DELAY_MS = 250;
 
     private static final String DOC_URL =
-            "https://github.com/MichaelSNelson/qupath-extension-classify-object-subset#readme";
+            "https://github.com/uw-loci/qupath-extension-classify-object-subset#readme";
 
     private final QuPathGUI qupath;
     private final ImageData<BufferedImage> imageData;
