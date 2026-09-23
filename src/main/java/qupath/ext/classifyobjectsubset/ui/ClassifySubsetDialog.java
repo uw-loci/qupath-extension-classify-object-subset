@@ -2,6 +2,7 @@ package qupath.ext.classifyobjectsubset.ui;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
@@ -657,6 +658,14 @@ public final class ClassifySubsetDialog {
 
         // Classifier change -> reload caches
         classifierCombo.valueProperty().addListener((obs, oldV, newV) -> onClassifierSelected(newV));
+
+        // Ring the classifier dropdown while nothing is selected: it is the one
+        // control every other part of the dialog depends on.
+        var noClassifierHalo = new javafx.scene.effect.DropShadow(
+                javafx.scene.effect.BlurType.GAUSSIAN, javafx.scene.paint.Color.web("#2E9BFF"), 12, 0.6, 0, 0);
+        classifierCombo.effectProperty().bind(Bindings.createObjectBinding(
+                () -> classifierCombo.getValue() == null ? noClassifierHalo : null,
+                classifierCombo.valueProperty()));
 
         // Apply disabled state is managed in recomputePreview() (called on every
         // control change). We must NOT bind disableProperty here, otherwise the
