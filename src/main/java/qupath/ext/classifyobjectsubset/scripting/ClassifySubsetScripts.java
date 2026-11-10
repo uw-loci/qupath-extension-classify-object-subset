@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -148,7 +149,7 @@ public final class ClassifySubsetScripts {
         Object sourceRaw = opts.get("source");
         if (sourceRaw != null) {
             try {
-                b.source(ObjectSourceMode.valueOf(sourceRaw.toString().trim().toUpperCase()));
+                b.source(ObjectSourceMode.valueOf(sourceRaw.toString().trim().toUpperCase(Locale.ROOT)));
             } catch (IllegalArgumentException e) {
                 logger.warn("Unknown source '{}', defaulting to ALL_COMPATIBLE", sourceRaw);
             }
@@ -274,7 +275,7 @@ public final class ClassifySubsetScripts {
         Object opRaw = map.get("op");
         if (opRaw != null) {
             try {
-                op = Comparator.valueOf(opRaw.toString().trim().toUpperCase());
+                op = Comparator.valueOf(opRaw.toString().trim().toUpperCase(Locale.ROOT));
             } catch (IllegalArgumentException e) {
                 logger.warn("Unknown comparator '{}', defaulting to GT", opRaw);
             }
